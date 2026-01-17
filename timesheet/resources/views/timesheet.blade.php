@@ -1,3 +1,5 @@
 <x-layout>
-    <h1>Timesheet Page</h1>
+    <x-slot:heading>
+        Timesheet Page
+    </x-slot:heading>
 </x-layout>
