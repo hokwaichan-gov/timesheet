@@ -10,4 +10,9 @@ class Timesheet extends Model
     use HasFactory;
     protected $table = 'timesheet_listings';
     protected $fillable = ['date', 'startTime', 'endTime'];
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }
