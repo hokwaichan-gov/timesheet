@@ -9,7 +9,7 @@ Route::get('/', function () {
 });
 
 Route::get('/timesheets', function () {
-    $timesheets = Timesheet::with('employee')->get();
+    $timesheets = Timesheet::with('employee')->paginate(3);
     return view('timesheets', [
         'timesheets' => $timesheets
     ]);

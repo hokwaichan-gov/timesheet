@@ -12,5 +12,8 @@
             </div>
         </a>
         @endforeach
+        <div>
+            {{ $timesheets -> links() }}
+        </div>
     </div>
 </x-layout>
