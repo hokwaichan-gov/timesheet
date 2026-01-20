@@ -3,13 +3,14 @@
         Timesheet Listings
     </x-slot:heading>
 
-    <ul>
+    <div class="space-y-4">
         @foreach ($timesheets as $timesheet)
-        <li>
-            <a href="/timesheets/{{ $timesheet['id'] }}" class="text-blue-500 hover:underline">
+        <a href="/timesheets/{{ $timesheet['id'] }}" class="block px-4 py-6 border border-gray-200 rounded-lg">
+            <div class="font-bold text-blue-500 text-sm">{{ $timesheet->employee->name }}</div>
+            <div>
                 <strong>{{ $timesheet['date'] }}:</strong> Your startTime:{{ $timesheet['startTime'] }} and your endTime:{{ $timesheet['endTime'] }}.
-            </a>
-        </li>
+            </div>
+        </a>
         @endforeach
-    </ul>
+    </div>
 </x-layout>

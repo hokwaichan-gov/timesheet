@@ -9,8 +9,9 @@ Route::get('/', function () {
 });
 
 Route::get('/timesheets', function () {
+    $timesheets = Timesheet::with('employee')->get();
     return view('timesheets', [
-        'timesheets' => Timesheet::all()
+        'timesheets' => $timesheets
     ]);
 });
 
