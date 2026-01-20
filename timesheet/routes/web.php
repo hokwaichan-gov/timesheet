@@ -25,6 +25,12 @@ Route::get('/timesheets/{id}', function ($id) {
 });
 
 Route::post('/timesheets', function () {
+    request()->validate([
+        'date' => ['required', 'min:3'],
+        'startTime' => ['required'],
+        'endTime' => ['required'],
+    ]);
+
     Timesheet::create([
         'employee_id' => 1,
         'date' => request('date'),

@@ -9,7 +9,8 @@ class Timesheet extends Model
 {
     use HasFactory;
     protected $table = 'timesheet_listings';
-    protected $fillable = ['employee_id', 'date', 'startTime', 'endTime'];
+    protected $guarded = [];
+    //protected $fillable = ['employee_id', 'date', 'startTime', 'endTime'];
 
     public function employee()
     {
