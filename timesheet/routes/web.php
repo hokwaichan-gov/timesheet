@@ -9,13 +9,27 @@ Route::get('/', function () {
 });
 
 Route::get('/timesheets', function () {
-    $timesheets = Timesheet::with('employee')->paginate(3);
-    return view('timesheets', [
+    $timesheets = Timesheet::with('employee')->latest()->paginate(3);
+    return view('timesheets.index', [
         'timesheets' => $timesheets
     ]);
 });
 
+Route::get('/timesheets/create', function () {
+    return view('timesheets.create');
+});
+
 Route::get('/timesheets/{id}', function ($id) {
     $timesheet = Timesheet::find($id);
-    return view('timesheet', ['timesheet' => $timesheet]);
+    return view('timesheets.show', ['timesheet' => $timesheet]);
+});
+
+Route::post('/timesheets', function () {
+    Timesheet::create([
+        'employee_id' => 1,
+        'date' => request('date'),
+        'startTime' => request('startTime'),
+        'endTime' => request('endTime'),
+    ]);
+    return redirect('timesheets');
 });

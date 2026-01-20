@@ -18,8 +18,8 @@ class TimesheetFactory extends Factory
     public function definition(): array
     {
         return [
-            'date' => fake()->date(),
             'employee_id' => Employee::factory(),
+            'date' => fake()->date(),
             'startTime' => fake()->time(),
             'endTime' => fake()->time(),
         ];
