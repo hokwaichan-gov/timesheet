@@ -11,6 +11,6 @@ class Employee extends Model
 
     public function timesheets()
     {
-        return $this->hasMany(timesheet::class);
+        return $this->hasMany(Timesheet::class);
     }
 }
