@@ -27,7 +27,7 @@ class TimesheetController extends Controller
             ->latest()
             ->paginate(50);
 
-        return view('timesheets.index', [
+        return view('timesheets.my-index', [
             'timesheets' => $timesheets
         ]);
     }
