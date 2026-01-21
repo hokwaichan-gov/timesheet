@@ -22,7 +22,7 @@
             <tbody class="divide-y divide-gray-200">
                 @foreach ($timesheets as $timesheet)
                 <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->date }}</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900"><a href="/timesheets/{{ $timesheet->id }}" class="text-blue-500 hover:underline">{{ $timesheet->date }}</a></td>
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ strtoupper(\Carbon\Carbon::parse($timesheet->date)->format('D')) }}</td>
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->status ?? '-' }}</td>
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->vacCtOther ?? '-' }}</td>
