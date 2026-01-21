@@ -20,6 +20,18 @@ class TimesheetController extends Controller
         ]);
     }
 
+    public function myTimesheets()
+    {
+        $timesheets = Timesheet::where('employee_id', Auth::user()->employee->id)
+            ->with('employee')
+            ->latest()
+            ->paginate(50);
+
+        return view('timesheets.index', [
+            'timesheets' => $timesheets
+        ]);
+    }
+
     public function create()
     {
         return view('timesheets.create');

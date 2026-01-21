@@ -16,13 +16,13 @@
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <img class="h-8 w-8" src="https://laracasts.com/images/logo/logo-triangle.svg" alt="Your Company">
-                        </div>
                         <div class="hidden md:block">
-                            <div class="ml-10 flex items-baseline space-x-4">
+                            <div class="flex items-baseline space-x-4">
                                 <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
                                 <x-nav-link href="/timesheets" :active="request()->is('/timesheets')">Timesheets</x-nav-link>
+                                @auth
+                                <x-nav-link href="/my-timesheets" :active="request()->is('/my-timesheets')">My Timesheets</x-nav-link>
+                                @endauth
                             </div>
                         </div>
                     </div>

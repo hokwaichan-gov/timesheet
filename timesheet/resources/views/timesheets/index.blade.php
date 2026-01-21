@@ -8,7 +8,7 @@
         <a href="/timesheets/{{ $timesheet['id'] }}" class="block px-4 py-6 border border-gray-200 rounded-lg">
             <div class="font-bold text-blue-500 text-sm">{{ $timesheet->employee->name }}</div>
             <div>
-                <strong>{{ $timesheet['date'] }}:</strong> Your startTime:{{ $timesheet['startTime'] }} and your endTime:{{ $timesheet['endTime'] }}.
+                <strong>{{ $timesheet['date'] }}:</strong> Start Time: {{ $timesheet['startTime'] }} EndTime: {{ $timesheet['endTime'] }}.
             </div>
         </a>
         @endforeach

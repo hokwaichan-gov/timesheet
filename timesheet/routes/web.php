@@ -8,6 +8,7 @@ use App\Http\Controllers\SessionController;
 Route::view('/', 'home');
 
 Route::get('/timesheets', [TimesheetController::class, 'index']);
+Route::get('/my-timesheets', [TimesheetController::class, 'myTimesheets'])->middleware('auth');
 Route::get('/timesheets/create', [TimesheetController::class, 'create']);
 Route::post('/timesheets', [TimesheetController::class, 'store'])->middleware('auth');
 Route::get('/timesheets/{timesheet}', [TimesheetController::class, 'show']);
