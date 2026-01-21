@@ -39,12 +39,12 @@ class TimesheetController extends Controller
         ]);
 
         Timesheet::create([
-            'employee_id' => 1,
+            'employee_id' => Auth::user()->employee->id,
             'date' => request('date'),
             'startTime' => request('startTime'),
             'endTime' => request('endTime'),
         ]);
-        return redirect('timesheets');
+        return redirect('/timesheets');
     }
 
     public function edit(Timesheet $timesheet)
@@ -54,7 +54,7 @@ class TimesheetController extends Controller
 
     public function update(Timesheet $timesheet)
     {
-        Gate::authorize('edit-timesheet', $timesheet);
+        Gate::authorize('edit', $timesheet);
 
         request()->validate([
             'date' => ['required', 'min:3'],
@@ -73,7 +73,7 @@ class TimesheetController extends Controller
 
     public function destroy(Timesheet $timesheet)
     {
-        Gate::authorize('edit-timesheet', $timesheet);
+        Gate::authorize('edit', $timesheet);
 
         $timesheet->delete();
 

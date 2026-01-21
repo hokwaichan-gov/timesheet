@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Timesheet;
+use App\Models\User;
 
 class TimesheetSeeder extends Seeder
 {
@@ -12,6 +13,11 @@ class TimesheetSeeder extends Seeder
      */
     public function run(): void
     {
-        Timesheet::factory(10)->create();
+        $user = User::where('email', 'test@example.com')->first();
+        if ($user && $user->employee) {
+            Timesheet::factory(10)->create([
+                'employee_id' => $user->employee->id,
+            ]);
+        }
     }
 }

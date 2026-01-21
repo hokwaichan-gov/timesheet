@@ -26,6 +26,11 @@ class RegisteredUserController extends Controller
 
         $user = User::create($validatedAttributes);
 
+        Employee::create([
+            'user_id' => $user->id,
+            'name' => $user->first_name . ' ' . $user->last_name,
+        ]);
+
         Auth::login($user);
 
         return redirect('timesheets');

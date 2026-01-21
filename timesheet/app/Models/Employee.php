@@ -10,6 +10,11 @@ class Employee extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'name',
+    ];
+
     public function timesheets()
     {
         return $this->hasMany(Timesheet::class);
