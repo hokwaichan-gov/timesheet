@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Timesheet;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use App\Models\User;
+
 use Illuminate\Http\Request;
 
 class TimesheetController extends Controller
@@ -10,6 +14,7 @@ class TimesheetController extends Controller
     public function index()
     {
         $timesheets = Timesheet::with('employee')->latest()->paginate(50);
+
         return view('timesheets.index', [
             'timesheets' => $timesheets
         ]);
@@ -49,6 +54,8 @@ class TimesheetController extends Controller
 
     public function update(Timesheet $timesheet)
     {
+        Gate::authorize('edit-timesheet', $timesheet);
+
         request()->validate([
             'date' => ['required', 'min:3'],
             'startTime' => ['required'],
@@ -66,7 +73,10 @@ class TimesheetController extends Controller
 
     public function destroy(Timesheet $timesheet)
     {
+        Gate::authorize('edit-timesheet', $timesheet);
+
         $timesheet->delete();
+
         return redirect('/timesheets');
     }
 }

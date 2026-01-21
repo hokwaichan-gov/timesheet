@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
+use App\Models\Employee;
 
 class RegisteredUserController extends Controller
 {
@@ -20,7 +21,7 @@ class RegisteredUserController extends Controller
             'first_name' => ['required'],
             'last_name'  => ['required'],
             'email'      => ['required', 'email'],
-            'password'   => ['required', Password::min(5)->letters()->numbers(), 'confirmed'],
+            'password'   => ['required', Password::min(5), 'confirmed'],
         ]);
 
         $user = User::create($validatedAttributes);

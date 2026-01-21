@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Employee;
 
 return new class extends Migration
 {
@@ -13,7 +14,8 @@ return new class extends Migration
     {
         Schema::create('timesheet_listings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('employee_id');
+            //$table->unsignedBigInteger('employee_id');
+            $table->foreignIdFor(Employee::class);
             $table->string('date');
             $table->string('startTime');
             $table->string('endTime');

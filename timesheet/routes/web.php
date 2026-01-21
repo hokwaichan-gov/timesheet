@@ -7,24 +7,19 @@ use App\Http\Controllers\SessionController;
 
 Route::view('/', 'home');
 
-//Resource Methods
-Route::resource('timesheets', TimesheetController::class);
-
-// Route::controller(TimesheetController::class)->group(function () {
-//     Route::get('/timesheets', 'index');
-//     Route::get('/timesheets/create', 'create');
-//     Route::get('/timesheets/{timesheet}', 'show');
-//     Route::post('/timesheets', 'store');
-//     Route::get('/timesheets/{timesheet}/edit', 'edit');
-//     Route::patch('/timesheets/{timesheet}', 'update');
-//     Route::delete('/timesheets/{timesheet}', 'destroy');
-// });
+Route::get('/timesheets', [TimesheetController::class, 'index']);
+Route::get('/timesheets/create', [TimesheetController::class, 'create']);
+Route::post('/timesheets', [TimesheetController::class, 'store'])->middleware('auth');
+Route::get('/timesheets/{timesheet}', [TimesheetController::class, 'show']);
+Route::get('/timesheets/{timesheet}/edit', [TimesheetController::class, 'edit'])->middleware('auth')->can('edit', 'timesheet');
+Route::patch('/timesheets/{timesheet}', [TimesheetController::class, 'update']);
+Route::delete('/timesheets/{timesheet}', [TimesheetController::class, 'destroy']);
 
 // Auth
 Route::get('register', [RegisteredUserController::class, 'create']);
 Route::post('register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'create']);
+Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 
 Route::post('/logout', [SessionController::class, 'destroy']);
