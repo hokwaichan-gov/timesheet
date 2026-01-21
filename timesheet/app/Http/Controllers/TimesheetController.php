@@ -11,24 +11,67 @@ use Illuminate\Http\Request;
 
 class TimesheetController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $timesheets = Timesheet::with('employee')->latest()->paginate(50);
+        $query = Timesheet::with('employee');
+
+        // Apply filters
+        if ($request->filled('employee_id')) {
+            $query->where('employee_id', $request->employee_id);
+        }
+
+        if ($request->filled('year')) {
+            $query->where('date', 'LIKE', $request->year . '-%');
+        }
+
+        if ($request->filled('month')) {
+            $month = str_pad($request->month, 2, '0', STR_PAD_LEFT);
+            $query->where('date', 'LIKE', '%-' . $month . '-%');
+        }
+
+        $timesheets = $query->latest()->paginate(50);
+
+        // Get filter options
+        $employees = \App\Models\Employee::orderBy('name')->get();
+        $years = Timesheet::selectRaw('DISTINCT YEAR(date) as year')
+            ->orderBy('year', 'desc')
+            ->pluck('year');
 
         return view('timesheets.index', [
-            'timesheets' => $timesheets
+            'timesheets' => $timesheets,
+            'employees' => $employees,
+            'years' => $years,
+            'filters' => $request->only(['employee_id', 'year', 'month'])
         ]);
     }
 
-    public function myTimesheets()
+    public function myTimesheets(Request $request)
     {
-        $timesheets = Timesheet::where('employee_id', Auth::user()->employee->id)
-            ->with('employee')
-            ->orderByDesc('date')
-            ->paginate(50);
+        $query = Timesheet::where('employee_id', Auth::user()->employee->id)
+            ->with('employee');
+
+        // Apply filters
+        if ($request->filled('year')) {
+            $query->where('date', 'LIKE', $request->year . '-%');
+        }
+
+        if ($request->filled('month')) {
+            $month = str_pad($request->month, 2, '0', STR_PAD_LEFT);
+            $query->where('date', 'LIKE', '%-' . $month . '-%');
+        }
+
+        $timesheets = $query->orderByDesc('date')->paginate(50);
+
+        // Get available years
+        $years = Timesheet::where('employee_id', Auth::user()->employee->id)
+            ->selectRaw('DISTINCT YEAR(date) as year')
+            ->orderBy('year', 'desc')
+            ->pluck('year');
 
         return view('timesheets.my-index', [
-            'timesheets' => $timesheets
+            'timesheets' => $timesheets,
+            'years' => $years,
+            'filters' => $request->only(['year', 'month'])
         ]);
     }
 
