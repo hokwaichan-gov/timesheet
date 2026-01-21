@@ -24,7 +24,7 @@ class TimesheetController extends Controller
     {
         $timesheets = Timesheet::where('employee_id', Auth::user()->employee->id)
             ->with('employee')
-            ->latest()
+            ->orderByDesc('date')
             ->paginate(50);
 
         return view('timesheets.my-index', [
