@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\RegisteredUserController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SessionController;
 
 Route::view('/', 'home');
 
@@ -24,5 +24,7 @@ Route::resource('timesheets', TimesheetController::class);
 Route::get('register', [RegisteredUserController::class, 'create']);
 Route::post('register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', [LoginController::class, 'create']);
-Route::post('/login', [LoginController::class, 'store']);
+Route::get('/login', [SessionController::class, 'create']);
+Route::post('/login', [SessionController::class, 'store']);
+
+Route::post('/logout', [SessionController::class, 'destroy']);
