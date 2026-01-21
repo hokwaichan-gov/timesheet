@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Timesheet;
 use App\Http\Controllers\TimesheetController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\LoginController;
 
 Route::view('/', 'home');
 
@@ -18,3 +19,10 @@ Route::resource('timesheets', TimesheetController::class);
 //     Route::patch('/timesheets/{timesheet}', 'update');
 //     Route::delete('/timesheets/{timesheet}', 'destroy');
 // });
+
+// Auth
+Route::get('register', [RegisteredUserController::class, 'create']);
+Route::post('register', [RegisteredUserController::class, 'store']);
+
+Route::get('/login', [LoginController::class, 'create']);
+Route::post('/login', [LoginController::class, 'store']);
