@@ -28,41 +28,6 @@
                             @enderror
                         </div>
                     </div>
-
-                    <div class="sm:col-span-4">
-                        <label for="startWork" class="block text-sm font-medium leading-6 text-gray-900">START WORK</label>
-                        <div class="mt-2">
-                            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input
-                                    type="time"
-                                    name="startWork"
-                                    id="startWork"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    value="{{ $timesheet->startWork }}"
-                                    required>
-                            </div>
-                            @error('startWork')
-                            <p class="text-xs text-red-500 font-semibold">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="sm:col-span-4">
-                        <label for="endWork" class="block text-sm font-medium leading-6 text-gray-900">END WORK</label>
-                        <div class="mt-2">
-                            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                                <input
-                                    type="time"
-                                    name="endWork"
-                                    id="endWork"
-                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    value="{{ $timesheet->endWork }}"
-                                    required>
-                                @error('endWork')
-                                <p class="text-xs text-red-500 font-semibold">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
                     <div class="sm:col-span-4">
                         <label for="status" class="block text-sm font-medium leading-6 text-gray-900">STATUS</label>
                         <div class="mt-2">
@@ -89,12 +54,27 @@
                                     name="vacCtOther"
                                     id="vacCtOther"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                    value="{{ $timesheet->vacCtOther }}"
-                                    placeholder="Vacation/Casual">
+                                    value="{{ $timesheet->vacCtOther }}">
                                 @error('vacCtOther')
                                 <p class="text-xs text-red-500 font-semibold">{{ $message }}</p>
                                 @enderror
                             </div>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-4">
+                        <label for="startWork" class="block text-sm font-medium leading-6 text-gray-900">START WORK</label>
+                        <div class="mt-2">
+                            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                <input
+                                    type="time"
+                                    name="startWork"
+                                    id="startWork"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    value="{{ $timesheet->startWork }}">
+                            </div>
+                            @error('startWork')
+                            <p class="text-xs text-red-500 font-semibold">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
                     <div class="sm:col-span-4">
@@ -130,6 +110,22 @@
                         </div>
                     </div>
                     <div class="sm:col-span-4">
+                        <label for="endWork" class="block text-sm font-medium leading-6 text-gray-900">END WORK</label>
+                        <div class="mt-2">
+                            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                <input
+                                    type="time"
+                                    name="endWork"
+                                    id="endWork"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    value="{{ $timesheet->endWork }}">
+                                @error('endWork')
+                                <p class="text-xs text-red-500 font-semibold">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sm:col-span-4">
                         <label for="empInitial" class="block text-sm font-medium leading-6 text-gray-900">EMP INITIAL</label>
                         <div class="mt-2">
                             <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -139,8 +135,7 @@
                                     id="empInitial"
                                     class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                     value="{{ $timesheet->empInitial }}"
-                                    placeholder="ABC"
-                                    required>
+                                    placeholder="ABC">
                                 @error('empInitial')
                                 <p class="text-xs text-red-500 font-semibold">{{ $message }}</p>
                                 @enderror

@@ -89,26 +89,26 @@ class TimesheetController extends Controller
     {
         request()->validate([
             'date' => ['required', 'min:3'],
-            'startWork' => ['required'],
-            'endWork' => ['required'],
-            'empInitial' => ['required'],
             'status' => ['nullable'],
             'vacCtOther' => ['nullable'],
+            'startWork' => ['nullable'],
             'mealStart' => ['nullable'],
             'mealEnd' => ['nullable'],
+            'endWork' => ['nullable'],
+            'empInitial' => ['nullable'],
             'otHours' => ['nullable', 'numeric'],
         ]);
 
         Timesheet::create([
             'employee_id' => Auth::user()->employee->id,
             'date' => request('date'),
-            'startWork' => request('startWork'),
-            'endWork' => request('endWork'),
-            'empInitial' => request('empInitial'),
             'status' => request('status'),
             'vacCtOther' => request('vacCtOther'),
+            'startWork' => request('startWork'),
             'mealStart' => request('mealStart'),
             'mealEnd' => request('mealEnd'),
+            'endWork' => request('endWork'),
+            'empInitial' => request('empInitial'),
             'otHours' => request('otHours'),
         ]);
         return redirect('/timesheets');
@@ -125,25 +125,25 @@ class TimesheetController extends Controller
 
         request()->validate([
             'date' => ['required', 'min:3'],
-            'startWork' => ['required'],
-            'endWork' => ['required'],
-            'empInitial' => ['required'],
             'status' => ['nullable'],
             'vacCtOther' => ['nullable'],
+            'startWork' => ['nullable'],
             'mealStart' => ['nullable'],
             'mealEnd' => ['nullable'],
+            'endWork' => ['nullable'],
+            'empInitial' => ['nullable'],
             'otHours' => ['nullable', 'numeric'],
         ]);
 
         $timesheet->update([
             'date' => request('date'),
-            'startWork' => request('startWork'),
-            'endWork' => request('endWork'),
-            'empInitial' => request('empInitial'),
             'status' => request('status'),
             'vacCtOther' => request('vacCtOther'),
+            'startWork' => request('startWork'),
             'mealStart' => request('mealStart'),
             'mealEnd' => request('mealEnd'),
+            'endWork' => request('endWork'),
+            'empInitial' => request('empInitial'),
             'otHours' => request('otHours'),
         ]);
 

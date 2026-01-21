@@ -17,20 +17,6 @@
                         </div>
                     </x-form-field>
                     <x-form-field>
-                        <x-form-label for="startWork">START WORK</x-form-label>
-                        <div class="mt-2">
-                            <x-form-input name="startWork" id="startWork" type="time" required></x-form-input>
-                            <x-form-error name="startWork" />
-                        </div>
-                    </x-form-field>
-                    <x-form-field>
-                        <x-form-label for="endWork">END WORK</x-form-label>
-                        <div class="mt-2">
-                            <x-form-input name="endWork" id="endWork" type="time" required></x-form-input>
-                            <x-form-error name="endWork" />
-                        </div>
-                    </x-form-field>
-                    <x-form-field>
                         <x-form-label for="status">STATUS</x-form-label>
                         <div class="mt-2">
                             <x-form-input name="status" id="status" type="text" placeholder="DO"></x-form-input>
@@ -40,8 +26,15 @@
                     <x-form-field>
                         <x-form-label for="vacCtOther">VAC/CT OTHER</x-form-label>
                         <div class="mt-2">
-                            <x-form-input name="vacCtOther" id="vacCtOther" type="text" placeholder="Vacation/Casual"></x-form-input>
+                            <x-form-input name="vacCtOther" id="vacCtOther" type="text"></x-form-input>
                             <x-form-error name="vacCtOther" />
+                        </div>
+                    </x-form-field>
+                    <x-form-field>
+                        <x-form-label for="startWork">START WORK</x-form-label>
+                        <div class="mt-2">
+                            <x-form-input name="startWork" id="startWork" type="time"></x-form-input>
+                            <x-form-error name="startWork" />
                         </div>
                     </x-form-field>
                     <x-form-field>
@@ -59,9 +52,16 @@
                         </div>
                     </x-form-field>
                     <x-form-field>
+                        <x-form-label for="endWork">END WORK</x-form-label>
+                        <div class="mt-2">
+                            <x-form-input name="endWork" id="endWork" type="time"></x-form-input>
+                            <x-form-error name="endWork" />
+                        </div>
+                    </x-form-field>
+                    <x-form-field>
                         <x-form-label for="empInitial">EMP INITIAL</x-form-label>
                         <div class="mt-2">
-                            <x-form-input name="empInitial" id="empInitial" type="text" placeholder="ABC" required></x-form-input>
+                            <x-form-input name="empInitial" id="empInitial" type="text" placeholder="ABC"></x-form-input>
                             <x-form-error name="empInitial" />
                         </div>
                     </x-form-field>
