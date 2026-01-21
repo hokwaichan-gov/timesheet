@@ -17,8 +17,14 @@ return new class extends Migration
             //$table->unsignedBigInteger('employee_id');
             $table->foreignIdFor(Employee::class);
             $table->string('date');
-            $table->string('startTime');
-            $table->string('endTime');
+            $table->string('startWork');
+            $table->string('endWork');
+            $table->string('status')->nullable();
+            $table->string('vacCtOther')->nullable();
+            $table->string('mealStart')->nullable();
+            $table->string('mealEnd')->nullable();
+            $table->string('empInitial');
+            $table->decimal('otHours', 5, 2)->nullable();
             $table->timestamps();
         });
     }

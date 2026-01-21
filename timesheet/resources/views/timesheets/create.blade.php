@@ -17,17 +17,59 @@
                         </div>
                     </x-form-field>
                     <x-form-field>
-                        <x-form-label for="startTime">Start Time</x-form-label>
+                        <x-form-label for="startWork">START WORK</x-form-label>
                         <div class="mt-2">
-                            <x-form-input name="startTime" id="startTime" type="startTime" placeholder="7:45 am" required></x-form-input>
-                            <x-form-error name="startTime" />
+                            <x-form-input name="startWork" id="startWork" type="startWork" placeholder="7:45 am" required></x-form-input>
+                            <x-form-error name="startWork" />
                         </div>
                     </x-form-field>
                     <x-form-field>
-                        <x-form-label for="endTime">End Time</x-form-label>
+                        <x-form-label for="endWork">END WORK</x-form-label>
                         <div class="mt-2">
-                            <x-form-input name="endTime" id="endTime" type="endTime" placeholder="4:30 pm" required></x-form-input>
-                            <x-form-error name="endTime" />
+                            <x-form-input name="endWork" id="endWork" type="endWork" placeholder="4:30 pm" required></x-form-input>
+                            <x-form-error name="endWork" />
+                        </div>
+                    </x-form-field>
+                    <x-form-field>
+                        <x-form-label for="status">STATUS</x-form-label>
+                        <div class="mt-2">
+                            <x-form-input name="status" id="status" type="text" placeholder="DO"></x-form-input>
+                            <x-form-error name="status" />
+                        </div>
+                    </x-form-field>
+                    <x-form-field>
+                        <x-form-label for="vacCtOther">VAC/CT OTHER</x-form-label>
+                        <div class="mt-2">
+                            <x-form-input name="vacCtOther" id="vacCtOther" type="text" placeholder="Vacation/Casual"></x-form-input>
+                            <x-form-error name="vacCtOther" />
+                        </div>
+                    </x-form-field>
+                    <x-form-field>
+                        <x-form-label for="mealStart">MEAL START</x-form-label>
+                        <div class="mt-2">
+                            <x-form-input name="mealStart" id="mealStart" type="text" placeholder="12:00 pm"></x-form-input>
+                            <x-form-error name="mealStart" />
+                        </div>
+                    </x-form-field>
+                    <x-form-field>
+                        <x-form-label for="mealEnd">MEAL END</x-form-label>
+                        <div class="mt-2">
+                            <x-form-input name="mealEnd" id="mealEnd" type="text" placeholder="1:00 pm"></x-form-input>
+                            <x-form-error name="mealEnd" />
+                        </div>
+                    </x-form-field>
+                    <x-form-field>
+                        <x-form-label for="empInitial">EMP INITIAL</x-form-label>
+                        <div class="mt-2">
+                            <x-form-input name="empInitial" id="empInitial" type="text" placeholder="ABC" required></x-form-input>
+                            <x-form-error name="empInitial" />
+                        </div>
+                    </x-form-field>
+                    <x-form-field>
+                        <x-form-label for="otHours">OT HOURS</x-form-label>
+                        <div class="mt-2">
+                            <x-form-input name="otHours" id="otHours" type="number" step="0.01" placeholder="1.5"></x-form-input>
+                            <x-form-error name="otHours" />
                         </div>
                     </x-form-field>
                 </div>

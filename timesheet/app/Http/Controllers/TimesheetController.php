@@ -46,15 +46,27 @@ class TimesheetController extends Controller
     {
         request()->validate([
             'date' => ['required', 'min:3'],
-            'startTime' => ['required'],
-            'endTime' => ['required'],
+            'startWork' => ['required'],
+            'endWork' => ['required'],
+            'empInitial' => ['required'],
+            'status' => ['nullable'],
+            'vacCtOther' => ['nullable'],
+            'mealStart' => ['nullable'],
+            'mealEnd' => ['nullable'],
+            'otHours' => ['nullable', 'numeric'],
         ]);
 
         Timesheet::create([
             'employee_id' => Auth::user()->employee->id,
             'date' => request('date'),
-            'startTime' => request('startTime'),
-            'endTime' => request('endTime'),
+            'startWork' => request('startWork'),
+            'endWork' => request('endWork'),
+            'empInitial' => request('empInitial'),
+            'status' => request('status'),
+            'vacCtOther' => request('vacCtOther'),
+            'mealStart' => request('mealStart'),
+            'mealEnd' => request('mealEnd'),
+            'otHours' => request('otHours'),
         ]);
         return redirect('/timesheets');
     }
@@ -70,14 +82,26 @@ class TimesheetController extends Controller
 
         request()->validate([
             'date' => ['required', 'min:3'],
-            'startTime' => ['required'],
-            'endTime' => ['required'],
+            'startWork' => ['required'],
+            'endWork' => ['required'],
+            'empInitial' => ['required'],
+            'status' => ['nullable'],
+            'vacCtOther' => ['nullable'],
+            'mealStart' => ['nullable'],
+            'mealEnd' => ['nullable'],
+            'otHours' => ['nullable', 'numeric'],
         ]);
 
         $timesheet->update([
             'date' => request('date'),
-            'startTime' => request('startTime'),
-            'endTime' => request('endTime'),
+            'startWork' => request('startWork'),
+            'endWork' => request('endWork'),
+            'empInitial' => request('empInitial'),
+            'status' => request('status'),
+            'vacCtOther' => request('vacCtOther'),
+            'mealStart' => request('mealStart'),
+            'mealEnd' => request('mealEnd'),
+            'otHours' => request('otHours'),
         ]);
 
         return redirect('/timesheets/' . $timesheet->id);

@@ -20,8 +20,14 @@ class TimesheetFactory extends Factory
         return [
             'employee_id' => Employee::factory(),
             'date' => fake()->date(),
-            'startTime' => fake()->time(),
-            'endTime' => fake()->time(),
+            'startWork' => fake()->time(),
+            'endWork' => fake()->time(),
+            'empInitial' => fake()->randomElement(['ABC', 'XYZ', 'DEF', 'GHI', 'JKL']),
+            'status' => fake()->optional()->randomElement(['DO']),
+            'vacCtOther' => fake()->optional()->randomElement(['VAC', 'CT', 'WFH', 'OTHER']),
+            'mealStart' => fake()->optional()->time(),
+            'mealEnd' => fake()->optional()->time(),
+            'otHours' => fake()->optional()->randomFloat(2, 0, 8),
         ];
     }
 }

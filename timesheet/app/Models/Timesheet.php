@@ -13,7 +13,7 @@ class Timesheet extends Model
 
     protected $guarded = [];
 
-    //protected $fillable = ['employee_id', 'date', 'startTime', 'endTime'];
+    //protected $fillable = ['employee_id', 'date', 'startWork', 'endWork'];
 
     public function employee()
     {
