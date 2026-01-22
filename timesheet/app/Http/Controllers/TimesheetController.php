@@ -84,7 +84,19 @@ class TimesheetController extends Controller
     public function store()
     {
         request()->validate([
-            'date' => ['required', 'min:3'],
+            'date' => [
+                'required',
+                'min:3',
+                function ($attribute, $value, $fail) {
+                    $exists = Timesheet::where('employee_id', Auth::user()->employee->id)
+                        ->where('date', $value)
+                        ->exists();
+
+                    if ($exists) {
+                        $fail('A timesheet for this date already exists.');
+                    }
+                },
+            ],
             'status' => ['nullable'],
             'vacCtOther' => ['nullable'],
             'startWork' => ['nullable'],
