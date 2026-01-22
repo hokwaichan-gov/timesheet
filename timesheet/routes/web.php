@@ -17,6 +17,7 @@ Route::post('/timesheets', [TimesheetController::class, 'store'])->middleware('a
 Route::get('/timesheets/{timesheet}', [TimesheetController::class, 'show']);
 Route::get('/timesheets/{timesheet}/edit', [TimesheetController::class, 'edit'])->middleware('auth')->can('edit', 'timesheet');
 Route::patch('/timesheets/{timesheet}', [TimesheetController::class, 'update']);
+Route::patch('/timesheets/{timesheet}/sup-initial', [TimesheetController::class, 'updateSupInitial']);
 Route::delete('/timesheets/{timesheet}', [TimesheetController::class, 'destroy']);
 
 // Auth

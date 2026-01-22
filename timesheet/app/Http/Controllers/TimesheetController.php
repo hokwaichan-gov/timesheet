@@ -162,6 +162,21 @@ class TimesheetController extends Controller
         return redirect('/timesheets/' . $timesheet->id);
     }
 
+    public function updateSupInitial(Timesheet $timesheet)
+    {
+        Gate::authorize('edit', $timesheet);
+
+        request()->validate([
+            'supInitial' => ['nullable', 'string', 'max:10'],
+        ]);
+
+        $timesheet->update([
+            'supInitial' => request('supInitial'),
+        ]);
+
+        return response()->json(['success' => true, 'supInitial' => $timesheet->supInitial]);
+    }
+
     public function destroy(Timesheet $timesheet)
     {
         Gate::authorize('edit', $timesheet);

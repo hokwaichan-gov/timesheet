@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:heading>
-        Timesheet Listings
+        All Employees’ Timesheets
     </x-slot:heading>
 
     <div class="py-4 mb-2">
@@ -75,7 +75,19 @@
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->endWork }}</td>
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->empInitial }}</td>
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->otHours ?? '-' }}</td>
-                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->supInitial ?? '-' }}</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">
+                        @if(Auth::user()->isAdmin())
+                        <input
+                            type="text"
+                            class="sup-initial-input w-16 px-1 py-0.5 text-xs border border-gray-300 rounded focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                            data-timesheet-id="{{ $timesheet->id }}"
+                            value="{{ $timesheet->supInitial }}"
+                            placeholder="-"
+                            maxlength="10">
+                        @else
+                        {{ $timesheet->supInitial ?? '-' }}
+                        @endif
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
@@ -85,4 +97,86 @@
     <div class="mt-4">
         {{ $timesheets->links() }}
     </div>
+
+    @if(Auth::user()->isAdmin())
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const supInitialInputs = document.querySelectorAll('.sup-initial-input');
+
+            supInitialInputs.forEach(input => {
+                let originalValue = input.value;
+
+                input.addEventListener('blur', function() {
+                    const newValue = this.value.trim();
+                    const timesheetId = this.dataset.timesheetId;
+
+                    if (newValue !== originalValue) {
+                        updateSupInitial(timesheetId, newValue, this);
+                    }
+                });
+
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        this.blur();
+                    }
+                });
+            });
+
+            function updateSupInitial(timesheetId, value, inputElement) {
+                inputElement.disabled = true;
+                inputElement.style.opacity = '0.6';
+
+                fetch(`/timesheets/${timesheetId}/sup-initial`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                        },
+                        body: JSON.stringify({
+                            supInitial: value
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            originalValue = data.supInitial;
+                            inputElement.value = data.supInitial;
+
+                            showFeedback(inputElement, 'Saved!', 'success');
+                        } else {
+                            throw new Error('Update failed');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        inputElement.value = originalValue;
+                        showFeedback(inputElement, 'Error saving', 'error');
+                    })
+                    .finally(() => {
+                        inputElement.disabled = false;
+                        inputElement.style.opacity = '1';
+                    });
+            }
+
+            function showFeedback(element, message, type) {
+                const existingFeedback = element.parentNode.querySelector('.feedback-message');
+                if (existingFeedback) {
+                    existingFeedback.remove();
+                }
+
+                const feedback = document.createElement('div');
+                feedback.className = `feedback-message text-xs mt-1 ${type === 'success' ? 'text-green-600' : 'text-red-600'}`;
+                feedback.textContent = message;
+
+                element.parentNode.insertBefore(feedback, element.nextSibling);
+
+                setTimeout(() => {
+                    if (feedback.parentNode) {
+                        feedback.remove();
+                    }
+                }, 2000);
+            }
+        });
+    </script>
+    @endif
 </x-layout>
