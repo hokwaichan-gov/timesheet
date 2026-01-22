@@ -28,7 +28,7 @@ class TimesheetController extends Controller
             $query->where('date', 'LIKE', '%-' . $month . '-%');
         }
 
-        $timesheets = $query->latest()->paginate(50);
+        $timesheets = $query->latest()->paginate(40);
 
         $employees = \App\Models\Employee::orderBy('name')->get();
         $years = Timesheet::selectRaw('DISTINCT YEAR(date) as year')
@@ -57,7 +57,7 @@ class TimesheetController extends Controller
             $query->where('date', 'LIKE', '%-' . $month . '-%');
         }
 
-        $timesheets = $query->orderByDesc('date')->paginate(50);
+        $timesheets = $query->orderByDesc('date')->paginate(20);
 
         $years = Timesheet::where('employee_id', Auth::user()->employee->id)
             ->selectRaw('DISTINCT YEAR(date) as year')
@@ -74,6 +74,11 @@ class TimesheetController extends Controller
     public function create()
     {
         return view('timesheets.create');
+    }
+
+    public function createWeek()
+    {
+        return view('timesheets.create-week');
     }
 
     public function show(Timesheet $timesheet)
@@ -122,6 +127,52 @@ class TimesheetController extends Controller
             'otHours' => request('otHours'),
         ]);
         return redirect('/timesheets');
+    }
+
+    public function storeWeek()
+    {
+        request()->validate([
+            'monday' => ['required', 'date'],
+        ]);
+
+        $monday = \Carbon\Carbon::parse(request('monday'));
+
+        // Ensure it's a Monday
+        if ($monday->dayOfWeek !== 1) {
+            return back()->withErrors(['monday' => 'Please select a Monday.']);
+        }
+
+        $createdCount = 0;
+        $skippedCount = 0;
+
+        for ($i = 0; $i < 7; $i++) {
+            $date = $monday->copy()->addDays($i)->format('Y-m-d');
+
+            $exists = Timesheet::where('employee_id', Auth::user()->employee->id)
+                ->where('date', $date)
+                ->exists();
+
+            if (!$exists) {
+                // Saturday (i=5) and Sunday (i=6) get "DO" status
+                $status = ($i == 5 || $i == 6) ? 'DO' : null;
+
+                Timesheet::create([
+                    'employee_id' => Auth::user()->employee->id,
+                    'date' => $date,
+                    'status' => $status,
+                ]);
+                $createdCount++;
+            } else {
+                $skippedCount++;
+            }
+        }
+
+        $message = "Created $createdCount timesheets.";
+        if ($skippedCount > 0) {
+            $message .= " Skipped $skippedCount existing timesheets.";
+        }
+
+        return redirect('/my-timesheets')->with('success', $message);
     }
 
     public function edit(Timesheet $timesheet)

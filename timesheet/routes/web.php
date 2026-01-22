@@ -13,7 +13,9 @@ Route::get('/', function () {
 Route::get('/timesheets', [TimesheetController::class, 'index'])->middleware('admin');
 Route::get('/my-timesheets', [TimesheetController::class, 'myTimesheets'])->middleware('auth');
 Route::get('/timesheets/create', [TimesheetController::class, 'create']);
+Route::get('/timesheets/create-week', [TimesheetController::class, 'createWeek']);
 Route::post('/timesheets', [TimesheetController::class, 'store'])->middleware('auth');
+Route::post('/timesheets/create-week', [TimesheetController::class, 'storeWeek'])->middleware('auth');
 Route::get('/timesheets/{timesheet}', [TimesheetController::class, 'show']);
 Route::get('/timesheets/{timesheet}/edit', [TimesheetController::class, 'edit'])->middleware('auth')->can('edit', 'timesheet');
 Route::patch('/timesheets/{timesheet}', [TimesheetController::class, 'update']);

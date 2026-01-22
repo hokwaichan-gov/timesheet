@@ -3,6 +3,12 @@
         My Timesheets
     </x-slot:heading>
 
+    @if(session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        {{ session('success') }}
+    </div>
+    @endif
+
     <div class="py-4 mb-2">
         <form method="GET" action="/my-timesheets" class="flex flex-wrap gap-6 items-end">
             <div class="min-w-0">

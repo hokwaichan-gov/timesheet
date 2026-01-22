@@ -95,7 +95,23 @@
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
 
                 @auth
-                <x-button href="/timesheets/create">Create Timesheet</x-button>
+                <div class="relative inline-block text-left">
+                    <div>
+                        <button type="button" id="create-dropdown-button" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
+                            Create Timesheet
+                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="create-dropdown-menu" class="hidden absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
+                        <div class="py-1" role="none">
+                            <a href="/timesheets/create" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-100" role="menuitem">Create Single Timesheet</a>
+                            <a href="/timesheets/create-week" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-gray-100" role="menuitem">Create Week</a>
+                        </div>
+                    </div>
+                </div>
                 @endauth
             </div>
         </header>
@@ -106,6 +122,22 @@
             </div>
         </main>
     </div>
+
+    <script>
+        document.getElementById('create-dropdown-button').addEventListener('click', function() {
+            const menu = document.getElementById('create-dropdown-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const button = document.getElementById('create-dropdown-button');
+            const menu = document.getElementById('create-dropdown-menu');
+            if (!button.contains(event.target) && !menu.contains(event.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 
 </html>
