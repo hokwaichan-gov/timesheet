@@ -15,7 +15,6 @@ class TimesheetController extends Controller
     {
         $query = Timesheet::with('employee');
 
-        // Apply filters
         if ($request->filled('employee_id')) {
             $query->where('employee_id', $request->employee_id);
         }
@@ -31,7 +30,6 @@ class TimesheetController extends Controller
 
         $timesheets = $query->latest()->paginate(50);
 
-        // Get filter options
         $employees = \App\Models\Employee::orderBy('name')->get();
         $years = Timesheet::selectRaw('DISTINCT YEAR(date) as year')
             ->orderBy('year', 'desc')
@@ -50,7 +48,6 @@ class TimesheetController extends Controller
         $query = Timesheet::where('employee_id', Auth::user()->employee->id)
             ->with('employee');
 
-        // Apply filters
         if ($request->filled('year')) {
             $query->where('date', 'LIKE', $request->year . '-%');
         }
@@ -62,7 +59,6 @@ class TimesheetController extends Controller
 
         $timesheets = $query->orderByDesc('date')->paginate(50);
 
-        // Get available years
         $years = Timesheet::where('employee_id', Auth::user()->employee->id)
             ->selectRaw('DISTINCT YEAR(date) as year')
             ->orderBy('year', 'desc')
