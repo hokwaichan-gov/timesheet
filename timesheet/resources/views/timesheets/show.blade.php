@@ -12,6 +12,7 @@
                 </div>
                 <div class="sm:text-right">
                     <p class="text-base text-gray-600">EMP INITIAL: {{ $timesheet->empInitial ?: '-'  }}</p>
+                    <p class="text-base text-gray-600">SUP INITIAL: {{ $timesheet->supInitial ?: '-'  }}</p>
                 </div>
             </div>
 

@@ -104,6 +104,7 @@ class TimesheetController extends Controller
             'mealEnd' => ['nullable'],
             'endWork' => ['nullable'],
             'empInitial' => ['nullable'],
+            'supInitial' => ['nullable'],
             'otHours' => ['nullable', 'numeric'],
         ]);
 
@@ -117,6 +118,7 @@ class TimesheetController extends Controller
             'mealEnd' => request('mealEnd'),
             'endWork' => request('endWork'),
             'empInitial' => request('empInitial'),
+            'supInitial' => request('supInitial'),
             'otHours' => request('otHours'),
         ]);
         return redirect('/timesheets');
@@ -140,6 +142,7 @@ class TimesheetController extends Controller
             'mealEnd' => ['nullable'],
             'endWork' => ['nullable'],
             'empInitial' => ['nullable'],
+            'supInitial' => ['nullable'],
             'otHours' => ['nullable', 'numeric'],
         ]);
 
@@ -152,6 +155,7 @@ class TimesheetController extends Controller
             'mealEnd' => request('mealEnd'),
             'endWork' => request('endWork'),
             'empInitial' => request('empInitial'),
+            'supInitial' => request('supInitial'),
             'otHours' => request('otHours'),
         ]);
 

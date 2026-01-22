@@ -10,6 +10,6 @@ class TimesheetPolicy
 {
     public function edit(User $user, Timesheet $timesheet)
     {
-        return $timesheet->employee->user->is($user);
+        return $timesheet->employee->user->is($user) || $user->isAdmin();
     }
 }

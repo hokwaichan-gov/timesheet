@@ -160,6 +160,25 @@
                             </div>
                         </div>
                     </div>
+                    @if(Auth::user()->isAdmin())
+                    <div class="sm:col-span-4">
+                        <label for="supInitial" class="block text-sm font-medium leading-6 text-gray-900">SUP INITIAL</label>
+                        <div class="mt-2">
+                            <div class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                                <input
+                                    type="text"
+                                    name="supInitial"
+                                    id="supInitial"
+                                    class="block flex-1 border-0 bg-transparent py-1.5 px-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                                    value="{{ $timesheet->supInitial }}"
+                                    placeholder="XYZ">
+                                @error('supInitial')
+                                <p class="text-xs text-red-500 font-semibold">{{ $message }}</p>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
 

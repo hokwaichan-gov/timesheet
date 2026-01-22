@@ -47,6 +47,7 @@
                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">End Work</th>
                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">EMP initial</th>
                     <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">OT hours</th>
+                    <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SUP initial</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
@@ -62,6 +63,7 @@
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->endWork }}</td>
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->empInitial }}</td>
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->otHours ?? '-' }}</td>
+                    <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->supInitial ?? '-' }}</td>
                 </tr>
                 @endforeach
             </tbody>

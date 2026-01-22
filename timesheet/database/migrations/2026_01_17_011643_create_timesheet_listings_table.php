@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('mealEnd')->nullable();
             $table->string('empInitial')->nullable();
             $table->decimal('otHours', 5, 2)->nullable();
+            $table->string('supInitial')->nullable();
             $table->timestamps();
         });
     }
