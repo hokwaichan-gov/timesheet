@@ -18,11 +18,10 @@
                     <div class="flex items-center">
                         <div class="hidden md:block">
                             <div class="flex items-baseline space-x-4">
-                                <x-nav-link href="/" :active="request()->is('/')">Home</x-nav-link>
-                                <x-nav-link href="/timesheets" :active="request()->is('/timesheets')">Timesheets</x-nav-link>
                                 @auth
                                 <x-nav-link href="/my-timesheets" :active="request()->is('/my-timesheets')">My Timesheets</x-nav-link>
                                 @endauth
+                                <x-nav-link href="/timesheets" :active="request()->is('/timesheets')">Timesheets</x-nav-link>
                             </div>
                         </div>
                     </div>

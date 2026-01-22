@@ -5,7 +5,9 @@ use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
 
-Route::view('/', 'home');
+Route::get('/', function () {
+    return redirect('/my-timesheets');
+});
 
 Route::get('/timesheets', [TimesheetController::class, 'index']);
 Route::get('/my-timesheets', [TimesheetController::class, 'myTimesheets'])->middleware('auth');
