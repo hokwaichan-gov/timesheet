@@ -28,7 +28,11 @@ class TimesheetController extends Controller
             $query->where('date', 'LIKE', '%-' . $month . '-%');
         }
 
-        $timesheets = $query->latest()->paginate(40);
+        $timesheets = $query->join('employees', 'timesheet_listings.employee_id', '=', 'employees.id')
+            ->orderBy('employees.name')
+            ->orderByDesc('timesheet_listings.date')
+            ->select('timesheet_listings.*')
+            ->paginate(40);
 
         $employees = \App\Models\Employee::orderBy('name')->get();
         $years = Timesheet::selectRaw('DISTINCT YEAR(date) as year')

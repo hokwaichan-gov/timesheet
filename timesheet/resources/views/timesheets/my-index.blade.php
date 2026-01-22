@@ -57,7 +57,18 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
+                @php $previousWeek = null; @endphp
                 @foreach ($timesheets as $timesheet)
+                @php
+                $currentWeek = \Carbon\Carbon::parse($timesheet->date)->format('Y-W');
+                $isNewWeek = $previousWeek !== null && $previousWeek !== $currentWeek;
+                $previousWeek = $currentWeek;
+                @endphp
+                @if($isNewWeek)
+                <tr>
+                    <td colspan="11" class="px-4 py-1 bg-gray-200 border-t-2 border-gray-400"></td>
+                </tr>
+                @endif
                 <tr class="hover:bg-gray-50">
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900"><a href="/timesheets/{{ $timesheet->id }}" class="text-blue-500 hover:underline">{{ $timesheet->date }}</a></td>
                     <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ strtoupper(\Carbon\Carbon::parse($timesheet->date)->format('D')) }}</td>
