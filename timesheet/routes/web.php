@@ -4,12 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TimesheetController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return redirect('/my-timesheets');
 });
 
-Route::get('/timesheets', [TimesheetController::class, 'index']);
+Route::get('/timesheets', [TimesheetController::class, 'index'])->middleware('admin');
 Route::get('/my-timesheets', [TimesheetController::class, 'myTimesheets'])->middleware('auth');
 Route::get('/timesheets/create', [TimesheetController::class, 'create']);
 Route::post('/timesheets', [TimesheetController::class, 'store'])->middleware('auth');
@@ -26,3 +27,8 @@ Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 
 Route::post('/logout', [SessionController::class, 'destroy']);
+
+//Admin
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/timesheets', [AdminController::class, 'timesheets'])->name('admin.timesheets');
+});

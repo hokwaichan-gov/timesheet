@@ -28,7 +28,7 @@ class SessionController extends Controller
 
         request()->session()->regenerate();
 
-        return redirect('/timesheets');
+        return Auth::user()->isAdmin() ? redirect('/timesheets') : redirect('/my-timesheets');
     }
 
     public function destroy()

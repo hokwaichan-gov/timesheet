@@ -19,9 +19,11 @@
                         <div class="hidden md:block">
                             <div class="flex items-baseline space-x-4">
                                 @auth
+                                @if(auth()->user()->isAdmin())
+                                <x-nav-link href="/timesheets" :active="request()->is('/timesheets')">Timesheets</x-nav-link>
+                                @endif
                                 <x-nav-link href="/my-timesheets" :active="request()->is('/my-timesheets')">My Timesheets</x-nav-link>
                                 @endauth
-                                <x-nav-link href="/timesheets" :active="request()->is('/timesheets')">Timesheets</x-nav-link>
                             </div>
                         </div>
                     </div>
