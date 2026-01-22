@@ -8,49 +8,35 @@
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                     <h3 class="text-2xl font-medium text-gray-900">{{ $timesheet->date }} ({{ strtoupper(\Carbon\Carbon::parse($timesheet->date)->format('l')) }})</h3>
-                    <p class="mt-2 text-lg text-gray-600">Employee: {{ $timesheet->employee->name }}</p>
+                    <p class="mt-2 text-base text-gray-600">EMPLOYEE: {{ $timesheet->employee->name }}</p>
                 </div>
                 <div class="sm:text-right">
-                    <p class="text-lg text-gray-600">EMP INITIAL: {{ $timesheet->empInitial }}</p>
-                    @if($timesheet->otHours)
-                    <p class="text-lg text-gray-600">Overtime Hours: {{ $timesheet->otHours }}</p>
-                    @endif
+                    <p class="text-base text-gray-600">EMP INITIAL: {{ $timesheet->empInitial ?: '-'  }}</p>
                 </div>
             </div>
 
             <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                     <h4 class="text-lg font-medium text-gray-900">Work Hours</h4>
-                    <p class="mt-2 text-lg text-gray-600">START: {{ $timesheet->startWork }}</p>
-                    <p class="text-lg text-gray-600">END: {{ $timesheet->endWork }}</p>
+                    <p class="mt-2 text-sm text-gray-600">START: {{ $timesheet->startWork ?: '-' }}</p>
+                    <p class="text-sm text-gray-600">END: {{ $timesheet->endWork ?: '-' }}</p>
                 </div>
 
-                @if($timesheet->mealStart || $timesheet->mealEnd)
                 <div>
                     <h4 class="text-lg font-medium text-gray-900">Meal Break</h4>
-                    @if($timesheet->mealStart)
-                    <p class="mt-2 text-lg text-gray-600">START: {{ $timesheet->mealStart }}</p>
-                    @endif
-                    @if($timesheet->mealEnd)
-                    <p class="text-lg text-gray-600">END: {{ $timesheet->mealEnd }}</p>
-                    @endif
+                    <p class="mt-2 text-sm text-gray-600">START: {{ $timesheet->mealStart ?: '-' }}</p>
+                    <p class="text-sm text-gray-600">END: {{ $timesheet->mealEnd ?: '-' }}</p>
                 </div>
-                @endif
             </div>
 
-            @if($timesheet->status || $timesheet->vacCtOther)
             <div class="mt-4">
-                <h4 class="text-lg font-medium text-gray-900">Additional Information</h4>
+                <h4 class="text-lg font-medium text-gray-900">Additional</h4>
                 <div class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                    @if($timesheet->status)
-                    <p class="text-lg text-gray-600">STATUS: {{ $timesheet->status }}</p>
-                    @endif
-                    @if($timesheet->vacCtOther)
-                    <p class="text-lg text-gray-600">VAC/CT OTHER: {{ $timesheet->vacCtOther }}</p>
-                    @endif
+                    <p class="text-sm text-gray-600">STATUS: {{ $timesheet->status ?: '-' }}</p>
+                    <p class="text-sm text-gray-600">VAC/CT OTHER: {{ $timesheet->vacCtOther ?: '-' }}</p>
+                    <p class="text-sm text-gray-600">OT HOURS: {{ $timesheet->otHours ?: '-'  }}</p>
                 </div>
             </div>
-            @endif
         </div>
 
         <div class="bg-gray-50 px-6 py-6 sm:px-8">
