@@ -65,7 +65,7 @@
             <!-- Mobile menu, show/hide based on menu state. -->
             <div class="md:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                    <ul class="space-y-1">
+                    <ul class="space-y-1 ml-2">
                         @auth
                         @if(auth()->user()->isAdmin())
                         <li>
@@ -75,10 +75,10 @@
                         <li>
                             <x-nav-link href="/my-timesheets" :active="request()->is('/my-timesheets')" class="block">My Timesheets</x-nav-link>
                         </li>
-                        <li>
+                        <li class="mt-2">
                             <form method="POST" action="/logout" class="px-3 py-2">
                                 @csrf
-                                <x-form-button class="w-full text-sm py-1">Log Out</x-form-button>
+                                <x-form-button>Log Out</x-form-button>
                             </form>
                         </li>
                         @endauth
@@ -101,7 +101,7 @@
                 <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
 
                 @auth
-                <div class="relative inline-block text-left">
+                <div class="relative inline-block text-left mt-4 sm:mt-0">
                     <div>
                         <button type="button" id="create-dropdown-button" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
                             Create Timesheet
