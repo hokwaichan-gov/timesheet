@@ -65,27 +65,33 @@
             <!-- Mobile menu, show/hide based on menu state. -->
             <div class="md:hidden" id="mobile-menu">
                 <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                    <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                    <a href="/" class="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Home</a>
-                    <a href="/timesheet" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Timesheet</a>
-                </div>
-                <div class="border-t border-gray-700 pb-3 pt-4">
-                    <div class="flex items-center px-5">
-                        <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full" src="https://laracasts.com/images/lary-ai-face.svg" alt="">
-                        </div>
-                        <div class="ml-3">
-                            <div class="text-base font-medium leading-none text-white">Lary Robot</div>
-                            <div class="text-sm font-medium leading-none text-gray-400">jeffrey@laracasts.com</div>
-                        </div>
-                        <button type="button" class="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            <span class="absolute -inset-1.5"></span>
-                            <span class="sr-only">View notifications</span>
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                            </svg>
-                        </button>
-                    </div>
+                    <ul class="space-y-1">
+                        @auth
+                        @if(auth()->user()->isAdmin())
+                        <li>
+                            <x-nav-link href="/timesheets" :active="request()->is('/timesheets')" class="block">Timesheets</x-nav-link>
+                        </li>
+                        @endif
+                        <li>
+                            <x-nav-link href="/my-timesheets" :active="request()->is('/my-timesheets')" class="block">My Timesheets</x-nav-link>
+                        </li>
+                        <li>
+                            <form method="POST" action="/logout" class="px-3 py-2">
+                                @csrf
+                                <x-form-button class="w-full text-sm py-1">Log Out</x-form-button>
+                            </form>
+                        </li>
+                        @endauth
+
+                        @guest
+                        <li>
+                            <x-nav-link href="/login" :active="request()->is('login')" class="block">Log In</x-nav-link>
+                        </li>
+                        <li>
+                            <x-nav-link href="/register" :active="request()->is('register')" class="block">Register</x-nav-link>
+                        </li>
+                        @endguest
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -124,17 +130,29 @@
     </div>
 
     <script>
+        // Create Timesheet dropdown
         document.getElementById('create-dropdown-button').addEventListener('click', function() {
             const menu = document.getElementById('create-dropdown-menu');
             menu.classList.toggle('hidden');
         });
 
-        // Close dropdown when clicking outside
+        // Mobile menu toggle (hamburger button)
+        const mobileMenuButton = document.querySelector('[aria-controls="mobile-menu"]');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Close dropdowns when clicking outside
         document.addEventListener('click', function(event) {
-            const button = document.getElementById('create-dropdown-button');
-            const menu = document.getElementById('create-dropdown-menu');
-            if (!button.contains(event.target) && !menu.contains(event.target)) {
-                menu.classList.add('hidden');
+            const createButton = document.getElementById('create-dropdown-button');
+            const createMenu = document.getElementById('create-dropdown-menu');
+
+            if (createButton && createMenu && !createButton.contains(event.target) && !createMenu.contains(event.target)) {
+                createMenu.classList.add('hidden');
             }
         });
     </script>
