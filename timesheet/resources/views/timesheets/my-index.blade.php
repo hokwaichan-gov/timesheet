@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:heading>
-        My Timesheets
+        {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}’ Timesheets
     </x-slot:heading>
 
     @if(session('success'))

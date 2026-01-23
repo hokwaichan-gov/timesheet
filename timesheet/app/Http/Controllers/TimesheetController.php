@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Timesheet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Employee;
 use App\Models\User;
 
 use Illuminate\Http\Request;
@@ -32,9 +33,9 @@ class TimesheetController extends Controller
             ->orderBy('employees.name')
             ->orderByDesc('timesheet_listings.date')
             ->select('timesheet_listings.*')
-            ->paginate(40);
+            ->paginate(50);
 
-        $employees = \App\Models\Employee::orderBy('name')->get();
+        $employees = Employee::orderBy('name')->get();
         $years = Timesheet::selectRaw('DISTINCT YEAR(date) as year')
             ->orderBy('year', 'desc')
             ->pluck('year');
@@ -141,7 +142,6 @@ class TimesheetController extends Controller
 
         $monday = \Carbon\Carbon::parse(request('monday'));
 
-        // Ensure it's a Monday
         if ($monday->dayOfWeek !== 1) {
             return back()->withErrors(['monday' => 'Please select a Monday.']);
         }

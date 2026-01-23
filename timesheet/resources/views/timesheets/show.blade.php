@@ -11,31 +11,31 @@
                     <p class="mt-2 text-base text-gray-600">EMPLOYEE: {{ $timesheet->employee->name }}</p>
                 </div>
                 <div class="sm:text-right">
-                    <p class="text-base text-gray-600">EMP INITIAL: {{ $timesheet->empInitial ?: '-'  }}</p>
-                    <p class="text-base text-gray-600">SUP INITIAL: {{ $timesheet->supInitial ?: '-'  }}</p>
+                    <p class="mt-2 text-sm text-gray-600">EMP INITIAL: {{ $timesheet->empInitial ?: '-'  }}</p>
+                    <p class="mt-2 text-sm text-gray-600">SUP INITIAL: {{ $timesheet->supInitial ?: '-'  }}</p>
                 </div>
             </div>
 
             <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div>
                     <h4 class="text-lg font-medium text-gray-900">Work Hours</h4>
-                    <p class="mt-2 text-sm text-gray-600">START: {{ $timesheet->startWork ?: '-' }}</p>
-                    <p class="text-sm text-gray-600">END: {{ $timesheet->endWork ?: '-' }}</p>
+                    <p class="mt-2 text-xs text-gray-600">START: {{ $timesheet->startWork ?: '-' }}</p>
+                    <p class="mt-2 text-xs text-gray-600">END: {{ $timesheet->endWork ?: '-' }}</p>
                 </div>
 
                 <div>
                     <h4 class="text-lg font-medium text-gray-900">Meal Break</h4>
-                    <p class="mt-2 text-sm text-gray-600">START: {{ $timesheet->mealStart ?: '-' }}</p>
-                    <p class="text-sm text-gray-600">END: {{ $timesheet->mealEnd ?: '-' }}</p>
+                    <p class="mt-2 text-xs text-gray-600">START: {{ $timesheet->mealStart ?: '-' }}</p>
+                    <p class="mt-2 text-xs text-gray-600">END: {{ $timesheet->mealEnd ?: '-' }}</p>
                 </div>
             </div>
 
             <div class="mt-4">
                 <h4 class="text-lg font-medium text-gray-900">Additional</h4>
                 <div class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
-                    <p class="text-sm text-gray-600">STATUS: {{ $timesheet->status ?: '-' }}</p>
-                    <p class="text-sm text-gray-600">VAC/CT OTHER: {{ $timesheet->vacCtOther ?: '-' }}</p>
-                    <p class="text-sm text-gray-600">OT HOURS: {{ $timesheet->otHours ?: '-'  }}</p>
+                    <p class="text-xs text-gray-600">STATUS: {{ $timesheet->status ?: '-' }}</p>
+                    <p class="text-xs text-gray-600">VAC/CT OTHER: {{ $timesheet->vacCtOther ?: '-' }}</p>
+                    <p class="text-xs text-gray-600">OT HOURS: {{ $timesheet->otHours ?: '-'  }}</p>
                 </div>
             </div>
         </div>

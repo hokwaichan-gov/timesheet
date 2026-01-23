@@ -21,7 +21,7 @@ class RegisteredUserController extends Controller
             'first_name' => ['required'],
             'last_name'  => ['required'],
             'email'      => ['required', 'email'],
-            'password'   => ['required', Password::min(5), 'confirmed'],
+            'password'   => ['required', Password::min(5)->numbers()->letters(), 'confirmed'],
         ]);
 
         $user = User::create($validatedAttributes);

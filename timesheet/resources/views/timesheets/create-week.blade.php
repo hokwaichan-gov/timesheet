@@ -20,7 +20,6 @@
 
                 <p class="mt-4 text-sm text-gray-600">
                     This will create empty timesheets for Monday through Sunday of the selected week.
-                    Saturday and Sunday will be automatically set to "DO" status.
                     Existing timesheets will be skipped.
                 </p>
             </div>

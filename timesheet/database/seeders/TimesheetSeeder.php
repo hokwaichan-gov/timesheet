@@ -13,7 +13,7 @@ class TimesheetSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::where('email', 'test@example.com')->first();
+        $user = User::where('email', 'test@email.com')->first();
         if ($user && $user->employee) {
             Timesheet::factory(10)->create([
                 'employee_id' => $user->employee->id,

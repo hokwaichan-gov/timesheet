@@ -22,13 +22,13 @@ class SessionController extends Controller
 
         if (! Auth::attempt($validatedAttributes)) {
             throw ValidationException::withMessages([
-                'email' => 'Sorry, those credentials do not match.'
+                'email' => "Your password is incorrect or this account doesn't exist"
             ]);
         }
 
         request()->session()->regenerate();
 
-        return Auth::user()->isAdmin() ? redirect('/timesheets') : redirect('/my-timesheets');
+        return redirect('/my-timesheets');
     }
 
     public function destroy()
