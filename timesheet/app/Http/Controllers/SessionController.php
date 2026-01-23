@@ -22,7 +22,7 @@ class SessionController extends Controller
 
         if (! Auth::attempt($validatedAttributes)) {
             throw ValidationException::withMessages([
-                'email' => "Your password is incorrect or this account doesn't exist"
+                'password' => "Your password is incorrect or this account doesn't exist"
             ]);
         }
 
