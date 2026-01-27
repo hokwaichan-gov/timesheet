@@ -10,7 +10,7 @@
             <div class="border-b border-gray-900/10 pb-12">
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <x-form-field>
-                        <x-form-label for="date">Date</x-form-label>
+                        <x-form-label for="date">DATE</x-form-label>
                         <div class="mt-2">
                             <x-form-input name="date" id="date" type="date" placeholder="1/1/2026" required></x-form-input>
                             <x-form-error name="date" />
