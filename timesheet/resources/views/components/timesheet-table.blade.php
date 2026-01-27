@@ -39,11 +39,11 @@
                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ strtoupper(\Carbon\Carbon::parse($timesheet->date)->format('D')) }}</td>
                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->status ?? '-' }}</td>
                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->vacCtOther ?? '-' }}</td>
-                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->startWork }}</td>
+                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->startWork ?? '-' }}</td>
                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->mealStart ?? '-' }}</td>
                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->mealEnd ?? '-' }}</td>
-                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->endWork }}</td>
-                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->empInitial }}</td>
+                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->endWork ?? '-' }}</td>
+                <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->empInitial ?? '-' }}</td>
                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{{ $timesheet->otHours ?? '-' }}</td>
                 <td class="px-4 py-2 whitespace-nowrap text-sm text-gray-900">
                     @if($isAdmin)
